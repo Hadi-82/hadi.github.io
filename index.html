@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solar System Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <canvas id="starfield"></canvas>
+
+  <header>
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span>SOLAR<strong>EX</strong></span>
+    </div>
+    <p class="tagline">Navigate the cosmos. Click any world to explore.</p>
+  </header>
+
+  <main>
+    <div class="orrery-wrap">
+      <div class="sun-glow"></div>
+      <div class="sun" id="sun" data-planet="sun">
+        <div class="sun-surface"></div>
+      </div>
+
+      <!-- Orbits + Planets -->
+      <div class="orbit" id="orbit-mercury" style="--r:90px; --speed:4.7s; --color:#b5b5b5">
+        <div class="planet" id="mercury" data-planet="mercury" style="--size:8px; --glow:#b5b5b5"></div>
+      </div>
+
+      <div class="orbit" id="orbit-venus" style="--r:130px; --speed:7.4s; --color:#e8cda0">
+        <div class="planet" id="venus" data-planet="venus" style="--size:13px; --glow:#e8cda0"></div>
+      </div>
+
+      <div class="orbit" id="orbit-earth" style="--r:175px; --speed:12s; --color:#4fa3e0">
+        <div class="planet" id="earth" data-planet="earth" style="--size:14px; --glow:#4fa3e0">
+          <div class="moon-orbit">
+            <div class="moon"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit" id="orbit-mars" style="--r:220px; --speed:22s; --color:#c1440e">
+        <div class="planet" id="mars" data-planet="mars" style="--size:10px; --glow:#c1440e"></div>
+      </div>
+
+      <div class="orbit" id="orbit-jupiter" style="--r:285px; --speed:55s; --color:#c88b3a">
+        <div class="planet" id="jupiter" data-planet="jupiter" style="--size:30px; --glow:#c88b3a"></div>
+      </div>
+
+      <div class="orbit" id="orbit-saturn" style="--r:360px; --speed:130s; --color:#e4d191">
+        <div class="planet saturn-wrap" id="saturn" data-planet="saturn" style="--size:24px; --glow:#e4d191">
+          <div class="saturn-ring"></div>
+        </div>
+      </div>
+
+      <div class="orbit" id="orbit-uranus" style="--r:420px; --speed:290s; --color:#7de8e8">
+        <div class="planet" id="uranus" data-planet="uranus" style="--size:18px; --glow:#7de8e8"></div>
+      </div>
+
+      <div class="orbit" id="orbit-neptune" style="--r:470px; --speed:550s; --color:#3f54ba">
+        <div class="planet" id="neptune" data-planet="neptune" style="--size:17px; --glow:#3f54ba"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Info Panel -->
+  <aside class="info-panel" id="infoPanel">
+    <button class="close-btn" id="closePanel">&#x2715;</button>
+    <div class="planet-icon-wrap">
+      <div class="planet-icon" id="planetIcon"></div>
+    </div>
+    <h2 id="planetName">—</h2>
+    <p class="planet-subtitle" id="planetType">—</p>
+    <div class="divider"></div>
+    <p class="planet-desc" id="planetDesc">—</p>
+    <div class="stats" id="planetStats"></div>
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Speed Control -->
+  <div class="controls">
+    <label for="speedSlider">ORBIT SPEED</label>
+    <input type="range" id="speedSlider" min="0.1" max="4" step="0.1" value="1"/>
+    <span id="speedVal">1×</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
