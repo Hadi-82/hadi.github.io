@@ -1,94 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Solar System Explorer</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+    <!--
+        index.html - the landing page
+
+        This is the homepage for my Holidae prototype. The brief said
+        Holidae need their site to work well on mobile (78% of users
+        browse there) and on desktop (where 52% actually book). I've
+        gone mobile-first in the CSS - more on that in styles.css.
+
+        Sections on this page:
+          - header with logo + nav (hamburger on mobile)
+          - hero with a big image and CTA
+          - featured destinations cards
+          - why us / about
+          - newsletter signup
+          - footer
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Holidae - affordable holiday packages, hand-picked by our team. Browse destinations and book online.">
+    <title>Holidae | Affordable Holiday Packages</title>
+
+    <!-- Google Fonts. I picked Fraunces for headings because it has a
+         travel-magazine feel, and DM Sans for body text - clean and easy to read. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <canvas id="starfield"></canvas>
+    <!-- HEADER
+         Same header on every page so users always know where they are.
+         The hamburger button only shows on mobile (hidden in CSS at 768px+). -->
+    <header class="site-header">
+        <div class="container header-inner">
 
-  <header>
-    <div class="logo">
-      <span class="logo-dot"></span>
-      <span>SOLAR<strong>EX</strong></span>
-    </div>
-    <p class="tagline">Navigate the cosmos. Click any world to explore.</p>
-  </header>
+            <a href="index.html" class="logo" aria-label="Holidae - home">
+                <span class="logo-mark">H</span>
+                <span class="logo-text">Holidae</span>
+            </a>
 
-  <main>
-    <div class="orrery-wrap">
-      <div class="sun-glow"></div>
-      <div class="sun" id="sun" data-planet="sun">
-        <div class="sun-surface"></div>
-      </div>
+            <!-- Hamburger button.
+                 aria-expanded gets toggled by JS so screen readers know if the
+                 menu is open. Reference for ARIA usage:
+                 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role -->
+            <button
+                class="nav-toggle"
+                id="navToggle"
+                aria-controls="primaryNav"
+                aria-expanded="false"
+                aria-label="Open menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
 
-      <!-- Orbits + Planets -->
-      <div class="orbit" id="orbit-mercury" style="--r:90px; --speed:4.7s; --color:#b5b5b5">
-        <div class="planet" id="mercury" data-planet="mercury" style="--size:8px; --glow:#b5b5b5"></div>
-      </div>
+            <!-- The nav. On mobile this slides in from the side when the
+                 hamburger is tapped (the .is-open class is added by my JS). -->
+            <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+                <ul class="primary-nav-list">
+                    <li><a href="index.html" class="is-active">Home</a></li>
+                    <li><a href="package.html">Destinations</a></li>
+                    <li><a href="booking.html">Book</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <a href="booking.html" class="btn btn-primary primary-nav-cta">Book now</a>
+            </nav>
 
-      <div class="orbit" id="orbit-venus" style="--r:130px; --speed:7.4s; --color:#e8cda0">
-        <div class="planet" id="venus" data-planet="venus" style="--size:13px; --glow:#e8cda0"></div>
-      </div>
-
-      <div class="orbit" id="orbit-earth" style="--r:175px; --speed:12s; --color:#4fa3e0">
-        <div class="planet" id="earth" data-planet="earth" style="--size:14px; --glow:#4fa3e0">
-          <div class="moon-orbit">
-            <div class="moon"></div>
-          </div>
         </div>
-      </div>
+    </header>
 
-      <div class="orbit" id="orbit-mars" style="--r:220px; --speed:22s; --color:#c1440e">
-        <div class="planet" id="mars" data-planet="mars" style="--size:10px; --glow:#c1440e"></div>
-      </div>
+    <main>
 
-      <div class="orbit" id="orbit-jupiter" style="--r:285px; --speed:55s; --color:#c88b3a">
-        <div class="planet" id="jupiter" data-planet="jupiter" style="--size:30px; --glow:#c88b3a"></div>
-      </div>
+        <!-- HERO
+             Big image with the headline on top. The image scales using
+             object-fit: cover (in the CSS) so it doesn't get squashed
+             on different screen sizes. I also put a dark gradient
+             overlay over the image so the white text stays readable
+             no matter what photo I end up using. -->
+        <section class="hero" aria-labelledby="heroHeading">
 
-      <div class="orbit" id="orbit-saturn" style="--r:360px; --speed:130s; --color:#e4d191">
-        <div class="planet saturn-wrap" id="saturn" data-planet="saturn" style="--size:24px; --glow:#e4d191">
-          <div class="saturn-ring"></div>
+            <div class="hero-media">
+                <img
+                    src="https://placehold.co/1600x900/0d4f4a/faf6ef?text=Holidae"
+                    alt="Holidae"
+                    class="hero-img">
+            </div>
+
+            <div class="container hero-content">
+                <p class="eyebrow">Curated escapes &middot; Honest prices</p>
+                <h1 id="heroHeading" class="hero-title">
+                    Your next holiday,<br>
+                    <em>without the markup.</em>
+                </h1>
+                <p class="hero-lede">
+                    Hand-picked packages to the places you actually want to go.
+                    Transparent pricing, no hidden fees, and zero compromise on the good bits.
+                </p>
+                <div class="hero-actions">
+                    <a href="package.html" class="btn btn-primary">Browse destinations</a>
+                    <a href="#destinations" class="btn btn-ghost">See what's trending &darr;</a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FEATURED DESTINATIONS
+             A grid of 4 holiday cards.
+
+             The grid uses CSS Grid with auto-fit and minmax(), which I
+             learnt from this CSS-Tricks article:
+             https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
+             Means I don't need loads of media queries - the grid figures
+             out how many columns fit on its own. 1 col on mobile,
+             2 on tablet, 3-4 on desktop. -->
+        <section class="destinations" id="destinations" aria-labelledby="destHeading">
+            <div class="container">
+
+                <div class="section-header">
+                    <p class="eyebrow">This month's picks</p>
+                    <h2 id="destHeading" class="section-title">Featured destinations</h2>
+                    <p class="section-lede">
+                        Four trips our team is loving right now - from sun-soaked
+                        beaches to mountain retreats. Tap a card for the full itinerary.
+                    </p>
+                </div>
+
+                <ul class="card-grid">
+
+                    <!-- Card 1 -->
+                    <li class="card">
+                        <a href="package.html" class="card-link">
+                            <div class="card-media">
+                                <img
+                                    src="images/Santorini"
+                                    alt="Whitewashed buildings overlooking the sea in Santorini"
+                                    class="card-img"
+                                    loading="lazy">
+                                <span class="card-badge">7 nights</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-location">Greece</p>
+                                <h3 class="card-title">Santorini Sunsets</h3>
+                                <p class="card-price">from <strong>&pound;649</strong> pp</p>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Card 2 -->
+                    <li class="card">
+                        <a href="package.html" class="card-link">
+                            <div class="card-media">
+                                <img
+                                    src="images/Kyoto.avif"
+                                    alt="A traditional temple in Kyoto with autumn maples"
+                                    class="card-img"
+                                    loading="lazy">
+                                <span class="card-badge">10 nights</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-location">Japan</p>
+                                <h3 class="card-title">Kyoto in Autumn</h3>
+                                <p class="card-price">from <strong>&pound;1,289</strong> pp</p>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Card 3 -->
+                    <li class="card">
+                        <a href="package.html" class="card-link">   
+                            <div class="card-media">
+                                <img
+                                    src="images/Marrakech.jpg"
+                                    alt="A market in Marrakech with colourful textiles"
+                                    class="card-img"
+                                    loading="lazy">
+                                <span class="card-badge">5 nights</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-location">Morocco</p>
+                                <h3 class="card-title">Marrakech &amp; The Atlas</h3>
+                                <p class="card-price">from <strong>&pound;489</strong> pp</p>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Card 4 -->
+                    <li class="card">
+                        <a href="package.html" class="card-link">
+                            <div class="card-media">
+                                <img
+                                    src="images/Lisbon.jpg"
+                                    alt="Pastel buildings and a yellow tram in Lisbon"
+                                    class="card-img"
+                                    loading="lazy">
+                                <span class="card-badge">4 nights</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-location">Portugal</p>
+                                <h3 class="card-title">Lisbon City Break</h3>
+                                <p class="card-price">from <strong>&pound;329</strong> pp</p>
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+        <!-- WHY US
+             Three reasons to book with Holidae. Stacks on mobile,
+             goes 3-up on tablet+. -->
+        <section class="why-us" id="about" aria-labelledby="whyHeading">
+            <div class="container why-us-inner">
+
+                <div class="why-us-intro">
+                    <p class="eyebrow">Why Holidae</p>
+                    <h2 id="whyHeading" class="section-title">Holidays that put you first.</h2>
+                </div>
+
+                <ul class="features">
+                    <li class="feature">
+                        <span class="feature-num">01</span>
+                        <h3 class="feature-title">Honest pricing</h3>
+                        <p>What you see is what you pay. No surprise fees at checkout, no inflated single supplements.</p>
+                    </li>
+                    <li class="feature">
+                        <span class="feature-num">02</span>
+                        <h3 class="feature-title">Hand-picked stays</h3>
+                        <p>Every hotel and homestay is checked by our team. We don't list anywhere we wouldn't stay ourselves.</p>
+                    </li>
+                    <li class="feature">
+                        <span class="feature-num">03</span>
+                        <h3 class="feature-title">Real human support</h3>
+                        <p>Reach an actual person within minutes, seven days a week, before and during your trip.</p>
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+        <!-- NEWSLETTER -->
+        <section class="newsletter" aria-labelledby="newsletterHeading">
+            <div class="container newsletter-inner">
+
+                <h2 id="newsletterHeading" class="newsletter-title">Deals, drops &amp; daydreams.</h2>
+                <p class="newsletter-text">Join 30,000 travellers getting our weekly edit of the best new packages.</p>
+
+                <!-- Form is just for the prototype - my JS stops it submitting
+                     and shows a thank-you message instead. -->
+                <form class="newsletter-form" id="newsletterForm" novalidate>
+                    <label for="newsletterEmail" class="visually-hidden">Email address</label>
+                    <input type="email" id="newsletterEmail" name="email" placeholder="you@example.com" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-note" id="newsletterNote" hidden></p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (same on every page) -->
+    <footer class="site-footer">
+        <div class="container site-footer-inner">
+
+            <div class="site-footer-brand">
+                <span class="logo-mark logo-mark-light">H</span>
+                <p>Affordable holidays, thoughtfully curated.</p>
+            </div>
+
+            <nav class="site-footer-nav" aria-label="Footer">
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="package.html">Destinations</a></li>
+                        <li><a href="booking.html">Book</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#terms">Terms</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </nav>
+
         </div>
-      </div>
+        <div class="container site-footer-base">
+            <small>&copy; 2025 Holidae. Student prototype by Hadi.</small>
+        </div>
+    </footer>
 
-      <div class="orbit" id="orbit-uranus" style="--r:420px; --speed:290s; --color:#7de8e8">
-        <div class="planet" id="uranus" data-planet="uranus" style="--size:18px; --glow:#7de8e8"></div>
-      </div>
-
-      <div class="orbit" id="orbit-neptune" style="--r:470px; --speed:550s; --color:#3f54ba">
-        <div class="planet" id="neptune" data-planet="neptune" style="--size:17px; --glow:#3f54ba"></div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Info Panel -->
-  <aside class="info-panel" id="infoPanel">
-    <button class="close-btn" id="closePanel">&#x2715;</button>
-    <div class="planet-icon-wrap">
-      <div class="planet-icon" id="planetIcon"></div>
-    </div>
-    <h2 id="planetName">—</h2>
-    <p class="planet-subtitle" id="planetType">—</p>
-    <div class="divider"></div>
-    <p class="planet-desc" id="planetDesc">—</p>
-    <div class="stats" id="planetStats"></div>
-  </aside>
-
-  <div class="overlay" id="overlay"></div>
-
-  <!-- Speed Control -->
-  <div class="controls">
-    <label for="speedSlider">ORBIT SPEED</label>
-    <input type="range" id="speedSlider" min="0.1" max="4" step="0.1" value="1"/>
-    <span id="speedVal">1×</span>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

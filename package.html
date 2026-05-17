@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        package.html - holiday package detail page
+
+        Per the brief, Holidae need at least one page dedicated to a
+        specific holiday. I picked Santorini for this. The page tries
+        to give all the info someone would want before booking - photos,
+        what's included, an itinerary - so they feel confident clicking
+        "Book this trip".
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santorini Sunsets - 7 nights in Greece's most photogenic island. View the itinerary and book online with Holidae.">
+    <title>Santorini Sunsets | Holidae</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- HEADER (copied from index.html so the nav stays consistent.
+         I tried to find a way to share this between pages without a
+         framework but for a static prototype copy-paste was the only
+         real option). -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="index.html" class="logo" aria-label="Holidae - home">
+                <span class="logo-mark">H</span>
+                <span class="logo-text">Holidae</span>
+            </a>
+
+            <button
+                class="nav-toggle"
+                id="navToggle"
+                aria-controls="primaryNav"
+                aria-expanded="false"
+                aria-label="Open menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+                <ul class="primary-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="package.html" class="is-active">Destinations</a></li>
+                    <li><a href="booking.html">Book</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <a href="booking.html" class="btn btn-primary primary-nav-cta">Book now</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PACKAGE HERO
+             Big image on one side, summary + price card on the other.
+             Stacks into one column on mobile so the image leads.
+
+             The price card becomes "sticky" on desktop (CSS
+             position: sticky) so it stays visible while you scroll
+             through the itinerary, which I read is a useful pattern
+             for booking sites.
+             Reference: MDN - position
+             https://developer.mozilla.org/en-US/docs/Web/CSS/position -->
+        <section class="package-hero" aria-labelledby="packageHeading">
+            <div class="container package-hero-grid">
+
+                <div class="package-hero-media">
+                    <img
+                        src="images/Oia1.avif"
+                        alt="View across the white-and-blue rooftops of Oia at sunset"
+                        class="package-hero-img">
+                </div>
+
+                <div class="package-hero-summary">
+                    <p class="eyebrow">Greece &middot; Cyclades</p>
+                    <h1 id="packageHeading" class="package-hero-title">Santorini Sunsets</h1>
+                    <p class="package-hero-lede">
+                        Seven nights bouncing between caldera-view villages, volcanic
+                        beaches, and family-run tavernas - with a private boat day thrown in.
+                    </p>
+
+                    <!-- Price card. On mobile this is just a normal block but
+                         on desktop it sticks to the top of the screen as you
+                         scroll past it. -->
+                    <div class="price-card">
+                        <p class="price-card-from">From</p>
+                        <p class="price-card-price">&pound;649<span>pp</span></p>
+                        <p class="price-card-meta">7 nights &middot; Flights inc. &middot; May-Oct</p>
+                        <a href="booking.html" class="btn btn-primary btn-block">Book this trip</a>
+                        <a href="#itinerary" class="price-card-link">See the full itinerary &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- QUICK META BAR
+             Four little stats. 2x2 grid on mobile, single row on tablet+.
+             It's a simple bit but I think it makes the page feel more
+             professional - kind of like the info bars on Airbnb listings. -->
+        <section class="package-meta" aria-label="Trip at a glance">
+            <div class="container">
+                <ul class="meta-list">
+                    <li><span>Duration</span><strong>7 nights</strong></li>
+                    <li><span>Group size</span><strong>2-8 people</strong></li>
+                    <li><span>Difficulty</span><strong>Easy</strong></li>
+                    <li><span>Best for</span><strong>Couples &middot; Friends</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- DESCRIPTION + GALLERY
+             Two columns on desktop (text on the left, photos on the right),
+             stacked on mobile. -->
+        <section class="package-body">
+            <div class="container package-body-grid">
+
+                <article class="package-body-text">
+                    <h2 class="section-title">What's the trip?</h2>
+                    <p>
+                        You'll spend three nights in Fira getting the lay of the
+                        land, then move on to Oia for the postcard sunsets and slower
+                        mornings. We finish with a couple of nights on the quieter
+                        east coast at Kamari, where the black-sand beach and
+                        family-run tavernas keep the pace blissfully low.
+                    </p>
+                    <p>
+                        A private boat day around the caldera is included - stops
+                        at the Red Beach, the hot springs, and a little island that
+                        only the locals seem to know about. Flights, transfers, and
+                        breakfasts are all included in the price.
+                    </p>
+
+                    <h3 class="package-body-subhead">What's included</h3>
+                    <ul class="checklist">
+                        <li>Return flights from London Gatwick</li>
+                        <li>All airport &amp; ferry transfers</li>
+                        <li>7 nights' accommodation across 3 villages</li>
+                        <li>Daily breakfast</li>
+                        <li>Private caldera boat day with lunch</li>
+                        <li>24/7 in-destination support</li>
+                    </ul>
+                </article>
+
+                <!-- GALLERY
+                     A grid of 4 images. Two of them span the full width to
+                     give it more of a magazine feel rather than just being
+                     a boring 2x2 grid. -->
+                <aside class="gallery" aria-label="Photo gallery">
+                    <figure class="gallery-item gallery-item-lg">
+                        <img src="images/Oia2.jpg"
+                             alt="Sunset over Oia's blue-domed churches" loading="lazy">
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/oia3.jpg"
+                             alt="Bougainvillea on a whitewashed wall" loading="lazy">
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/oia4.jpg"
+                             alt="Greek salad on a sun-bleached taverna table" loading="lazy">
+                    </figure>
+                    <figure class="gallery-item gallery-item-wide">
+                        <img src="images/Oia5.webp"
+                             alt="Oia Cruise beside a mountain side" loading="lazy">
+                    </figure>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- ITINERARY
+             Day-by-day timeline. Each day has a small dot on a vertical
+             line - I styled this with ::before and ::after pseudo-elements
+             in the CSS, no extra HTML needed. Stays as one column on every
+             screen size since reading a sequence works best top-to-bottom. -->
+        <section class="itinerary" id="itinerary" aria-labelledby="itineraryHeading">
+            <div class="container">
+
+                <div class="section-header">
+                    <p class="eyebrow">Day by day</p>
+                    <h2 id="itineraryHeading" class="section-title">Your itinerary</h2>
+                </div>
+
+                <ol class="timeline">
+                    <li class="timeline-item">
+                        <span class="timeline-day">Day 1</span>
+                        <h3 class="timeline-title">Arrive in Fira</h3>
+                        <p>Airport pickup, check-in, and a sunset welcome drink overlooking the caldera.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="timeline-day">Day 2</span>
+                        <h3 class="timeline-title">Walk the caldera path</h3>
+                        <p>The classic Fira-to-Oia trail, stopping at Imerovigli for lunch.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="timeline-day">Day 3</span>
+                        <h3 class="timeline-title">Boat day around the caldera</h3>
+                        <p>Hot springs, Red Beach, and a long lunch at sea.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="timeline-day">Day 4-5</span>
+                        <h3 class="timeline-title">Slow mornings in Oia</h3>
+                        <p>Two nights of late breakfasts, art galleries, and the world's most-photographed sunset.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="timeline-day">Day 6-7</span>
+                        <h3 class="timeline-title">Beach time at Kamari</h3>
+                        <p>Black sand, taverna lunches, and an open-air cinema if you fancy it.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <span class="timeline-day">Day 8</span>
+                        <h3 class="timeline-title">Departure</h3>
+                        <p>Transfer to the airport and home.</p>
+                    </li>
+                </ol>
+
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="package-cta">
+            <div class="container">
+                <h2>Ready to pack?</h2>
+                <p>Spaces are limited - most departures sell out 6 weeks ahead.</p>
+                <a href="booking.html" class="btn btn-primary btn-lg">Book Santorini Sunsets</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container site-footer-inner">
+
+            <div class="site-footer-brand">
+                <span class="logo-mark logo-mark-light">H</span>
+                <p>Affordable holidays, thoughtfully curated.</p>
+            </div>
+
+            <nav class="site-footer-nav" aria-label="Footer">
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="package.html">Destinations</a></li>
+                        <li><a href="booking.html">Book</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#terms">Terms</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+        <div class="container site-footer-base">
+            <small>&copy; 2025 Holidae. Student prototype by Hadi.</small>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

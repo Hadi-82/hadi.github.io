@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        booking.html - the booking form
+
+        The brief said 52% of bookings happen on desktop, so I've put
+        most of the work into making the desktop layout feel solid -
+        a wide form with a sticky summary card next to it. On mobile
+        the summary just sits underneath the form so the form gets
+        the full screen width.
+
+        The form doesn't actually go anywhere - my JS catches the
+        submit, checks the required fields, and shows a thank-you
+        message. A real version would POST to a server.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book your Holidae holiday - quick, simple, and secure.">
+    <title>Book your trip | Holidae</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- HEADER (same on every page) -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="index.html" class="logo" aria-label="Holidae - home">
+                <span class="logo-mark">H</span>
+                <span class="logo-text">Holidae</span>
+            </a>
+
+            <button
+                class="nav-toggle"
+                id="navToggle"
+                aria-controls="primaryNav"
+                aria-expanded="false"
+                aria-label="Open menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+                <ul class="primary-nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="package.html">Destinations</a></li>
+                    <li><a href="booking.html" class="is-active">Book</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <a href="booking.html" class="btn btn-primary primary-nav-cta">Book now</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <section class="booking" aria-labelledby="bookingHeading">
+            <div class="container">
+
+                <div class="section-header section-header-left">
+                    <p class="eyebrow">Step 1 of 1</p>
+                    <h1 id="bookingHeading" class="section-title">Let's book your trip</h1>
+                    <p class="section-lede">
+                        Fill out the form below and we'll be in touch within the hour
+                        to confirm your dates and take payment securely over the phone.
+                    </p>
+                </div>
+
+                <!-- Two-column layout on desktop (form + summary), single
+                     column on mobile/tablet so the form gets the full width. -->
+                <div class="booking-grid">
+
+                    <!-- THE FORM
+                         I split the fields into two fieldsets (Your details /
+                         Trip details) which makes them feel less overwhelming.
+                         Read this on MDN about grouping form controls:
+                         https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset -->
+                    <form class="booking-form" id="bookingForm" novalidate>
+
+                        <!-- Personal details -->
+                        <fieldset>
+                            <legend>Your details</legend>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="firstName">First name</label>
+                                    <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                                </div>
+                                <div class="form-field">
+                                    <label for="lastName">Last name</label>
+                                    <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required autocomplete="email">
+                                <small class="form-help">We'll send your confirmation here.</small>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="phone">Phone number</label>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel">
+                            </div>
+                        </fieldset>
+
+                        <!-- Trip details -->
+                        <fieldset>
+                            <legend>Trip details</legend>
+
+                            <div class="form-field">
+                                <label for="destination">Which package?</label>
+                                <select id="destination" name="destination" required>
+                                    <option value="" disabled selected>Choose a destination</option>
+                                    <option value="santorini">Santorini Sunsets - &pound;649pp</option>
+                                    <option value="kyoto">Kyoto in Autumn - &pound;1,289pp</option>
+                                    <option value="marrakech">Marrakech &amp; The Atlas - &pound;489pp</option>
+                                    <option value="lisbon">Lisbon City Break - &pound;329pp</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="departureDate">Departure date</label>
+                                    <input type="date" id="departureDate" name="departureDate" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="travellers">Travellers</label>
+                                    <input type="number" id="travellers" name="travellers" min="1" max="8" value="2" required>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="notes">Anything we should know?</label>
+                                <textarea id="notes" name="notes" rows="4"
+                                    placeholder="Dietary requirements, accessibility needs, special occasions..."></textarea>
+                            </div>
+                        </fieldset>
+
+                        <!-- Consent checkbox - has to be ticked before submit -->
+                        <div class="form-field form-field-check">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">
+                                I agree to be contacted about this booking and have read the
+                                <a href="#terms">terms &amp; conditions</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Request booking</button>
+
+                        <!-- Success message - hidden until form submits successfully -->
+                        <div class="form-success" id="formSuccess" hidden role="status">
+                            <h3>Thanks - we've got your request.</h3>
+                            <p>One of our team will be in touch within the hour to confirm details and take payment.</p>
+                        </div>
+                    </form>
+
+                    <!-- SUMMARY CARD
+                         Sticks to the top of the screen on desktop while you
+                         fill in the form, so you can see the price as you go.
+                         On mobile it just sits below the form. -->
+                    <aside class="booking-summary" aria-label="Booking summary">
+                        <div class="summary-card">
+                            <h2 class="summary-card-title">Your trip</h2>
+
+                            <div class="summary-card-media">
+                                <img src="images/Santorini" alt="Santorini" loading="lazy">
+                            </div>
+
+                            <h3 class="summary-card-heading">Santorini Sunsets</h3>
+                            <p class="summary-card-sub">Greece &middot; 7 nights</p>
+
+                            <dl class="summary-card-list">
+                                <div>
+                                    <dt>Package</dt>
+                                    <dd>&pound;649 pp</dd>
+                                </div>
+                                <div>
+                                    <dt>Travellers</dt>
+                                    <dd>2</dd>
+                                </div>
+                                <div>
+                                    <dt>Service fee</dt>
+                                    <dd>&pound;0</dd>
+                                </div>
+                                <div class="summary-card-total">
+                                    <dt>Total</dt>
+                                    <dd>&pound;1,298</dd>
+                                </div>
+                            </dl>
+
+                            <p class="summary-card-note">
+                                A 20% deposit secures your booking. The balance is due 8 weeks before departure.
+                            </p>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container site-footer-inner">
+
+            <div class="site-footer-brand">
+                <span class="logo-mark logo-mark-light">H</span>
+                <p>Affordable holidays, thoughtfully curated.</p>
+            </div>
+
+            <nav class="site-footer-nav" aria-label="Footer">
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="package.html">Destinations</a></li>
+                        <li><a href="booking.html">Book</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#terms">Terms</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+        <div class="container site-footer-base">
+            <small>&copy; 2026 Holidae. Student prototype by Hadi.</small>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
